@@ -1,0 +1,18 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Home Assistant Community Add-on: Nginx Proxy Manager
+# Runs the Vouch Proxy Server
+# ==============================================================================
+
+export VOUCH_ROOT="/opt/vouch"
+export VOUCH_CONFIG="/data/vouch-config.yml"
+
+# Run the Vouch server
+bashio::log.info 'Starting the Vouch Proxy Server...'
+
+while :
+do
+  # Catch crashes and attempt restart
+  exec /opt/vouch-proxy > /dev/null || /bin/true
+  sleep 1
+done

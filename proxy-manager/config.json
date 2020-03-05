@@ -22,8 +22,18 @@
   "hassio_api": true,
   "hassio_role": "default",
   "map": ["ssl:rw", "backup:rw"],
-  "options": {},
+  "options": {
+    "domain": "hassio.local",
+    "homeassistant_url": "https://home.hassio.local",
+    "vouch_url": "https://vouch.hassio.local",
+    "jwt_max_age": 10080,
+    "log_level": "info"
+  },
   "schema": {
+    "domain": "str",
+    "homeassistant_url": "url",
+    "vouch_url": "url",
+    "jwt_max_age": "int",
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)?"
   }
 }

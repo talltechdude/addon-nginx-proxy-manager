@@ -1,9 +1,19 @@
 ARG BUILD_FROM=hassioaddons/base:7.0.2
+
+# Grab Vouch Binary from official container
+FROM "voucher/vouch-proxy" as vouch
+
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Copy vouch binary from official container
+RUN mkdir -p /opt/vouch
+COPY --from=vouch templates/ /opt/vouch/templates/
+COPY --from=vouch static/ /opt/vouch/static/
+COPY --from=vouch /vouch-proxy /opt/vouch/vouch-proxy
 
 # Setup base
 # hadolint ignore=DL3003
@@ -26,6 +36,7 @@ RUN \
         nodejs=12.15.0-r1 \
         openssl=1.1.1d-r3 \
         libcap=2.27-r0 \
+        gettext=0.20.1-r2 \
     \
     && yarn global add modclean \
     \
@@ -53,10 +64,6 @@ RUN \
     \
     && cd /app/backend \
     && yarn install \
-<<<<<<< HEAD
-    && yarn eslint . \
-=======
->>>>>>> 60933355b78394557d03f309a8b7933d62be9103
     && rm -rf node_modules \
     && cp -r /app/backend/. /opt/nginx-proxy-manager/ \
     \
@@ -67,11 +74,7 @@ RUN \
     \
     && rm -f -r /etc/nginx \
     && cp -r /app/docker/rootfs/etc/nginx /etc/nginx \
-<<<<<<< HEAD
-    && rm -f /etc/nginx/conf.d/dev.conf \ 
-=======
     && rm -f /etc/nginx/conf.d/dev.conf \
->>>>>>> 60933355b78394557d03f309a8b7933d62be9103
     \
     && sed -i "s#root /app/frontend;#root /opt/nginx-proxy-manager/frontend;#" \
         /etc/nginx/conf.d/production.conf \

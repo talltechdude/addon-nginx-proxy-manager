@@ -1,8 +1,8 @@
 ---
-include: https://raw.githubusercontent.com/hassio-addons/organization/master/gitlabci/addon.yml
+include: https://raw.githubusercontent.com/talltechdude/hassio-addons/master/gitlab-addon-ci.yml
 
 variables:
-  ADDON_GITHUB_REPO: "hassio-addons/addon-nginx-proxy-manager"
+  ADDON_GITHUB_REPO: "talltechdude/addon-nginx-proxy-manager"
   ADDON_SLUG: "nginxproxymanager"
   ADDON_TARGET: "proxy-manager"
 
