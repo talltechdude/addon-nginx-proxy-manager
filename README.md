@@ -23,7 +23,7 @@
 
 Manage Nginx proxy hosts with a simple, powerful interface.
 
-![The Nginx Proxy Manager Hass.io add-on](images/screenshot.gif)
+![The Nginx Proxy Manager add-on](images/screenshot.gif)
 
 ## About
 
@@ -31,7 +31,7 @@ This add-on enables you to easily forward incoming connections to anywhere,
 including free SSL, without having to know too much about Nginx
 or Let’s Encrypt.
 
-Forward your domain to your Home Assistant, Hass.io add-ons, or websites running
+Forward your domain to your Home Assistant, add-ons, or websites running
 at home or anywhere else, straight from a simple, powerful interface.
 
 Want to protect the website with a username/password? Well, it can do that too!
@@ -46,13 +46,15 @@ Nginx proxy manager by providing additional Nginx directives.
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Home Assistant add-on.
 
+1. Ensure you are running the MariaDB add-on. This add-on is required to use
+   the Nginx Proxy Manager add-on as it uses the database services provided.
 1. Search for the "Nginx Proxy Manager" add-on in the Supervisor add-on store
    and install it.
 1. Start the "Nginx Proxy Manager" add-on
 1. Check the logs of the "Nginx Proxy Manager" add-on to see if everything went well.
 1. Click the "OPEN WEB UI" button and login using:
    `admin@example.com` / `changeme`
-1. Forward port `80` and `443` from your router to your Hass.io machine.
+1. Forward port `80` and `443` from your router to your Home Assistant machine.
 1. Enjoy the add-on!
 
 ## Configuration
@@ -89,8 +91,12 @@ you are troubleshooting.
 
 - The original NGinx Proxy Manager has support for forwarding TCP/UDP streams,
   which is removed from this add-on. It makes no sense from a
-  Hass.io / Home Assistant / Home perspective and, by removing it, it also
+  Home Assistant / Home perspective and, by removing it, it also
   removed the need for this add-on to run on the Docker host network.
+- This add-on stores its database on the MariaDB add-on. This also means that
+  by taking a snapshot of just the Nginx Proxy Manager add-on, will not
+  contain the data from this add-on. Please make sure you backup both
+  the Nginx Proxy Manager and the MariaDB add-ons.
 
 ## Changelog & Releases
 
@@ -182,7 +188,7 @@ SOFTWARE.
 [discord]: https://discord.me/hassioaddons
 [dockerhub]: https://hub.docker.com/r/hassioaddons/nginxproxymanager
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
-[forum]: https://community.home-assistant.io/t/community-hass-io-add-on-nginx-proxy-manager/111830?u=frenck
+[forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-nginx-proxy-manager/111830?u=frenck
 [frenck]: https://github.com/frenck
 [github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
 [github-sponsors]: https://github.com/sponsors/frenck

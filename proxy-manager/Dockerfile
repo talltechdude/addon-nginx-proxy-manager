@@ -1,4 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base:7.0.0
+ARG BUILD_FROM=hassioaddons/base:7.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -53,7 +53,10 @@ RUN \
     \
     && cd /app/backend \
     && yarn install \
+<<<<<<< HEAD
     && yarn eslint . \
+=======
+>>>>>>> 60933355b78394557d03f309a8b7933d62be9103
     && rm -rf node_modules \
     && cp -r /app/backend/. /opt/nginx-proxy-manager/ \
     \
@@ -64,7 +67,11 @@ RUN \
     \
     && rm -f -r /etc/nginx \
     && cp -r /app/docker/rootfs/etc/nginx /etc/nginx \
+<<<<<<< HEAD
     && rm -f /etc/nginx/conf.d/dev.conf \ 
+=======
+    && rm -f /etc/nginx/conf.d/dev.conf \
+>>>>>>> 60933355b78394557d03f309a8b7933d62be9103
     \
     && sed -i "s#root /app/frontend;#root /opt/nginx-proxy-manager/frontend;#" \
         /etc/nginx/conf.d/production.conf \
@@ -123,8 +130,8 @@ LABEL \
     org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.name="Nginx Proxy Manager" \
     org.label-schema.schema-version="1.0" \
-    org.label-schema.url="https://community.home-assistant.io/t/community-hass-io-add-on-nginx-proxy-manager/111830?u=frenck" \
+    org.label-schema.url="https://community.home-assistant.io/t/home-assistant-community-add-on-nginx-proxy-manager/111830?u=frenck" \
     org.label-schema.usage="https://github.com/hassio-addons/addon-nginx-proxy-manager/tree/master/README.md" \
     org.label-schema.vcs-ref=${BUILD_REF} \
     org.label-schema.vcs-url="https://github.com/hassio-addons/addon-nginx-proxy-manager" \
-    org.label-schema.vendor="Community Hass.io Add-ons"
+    org.label-schema.vendor="Home Assistant Community Add-ons"
